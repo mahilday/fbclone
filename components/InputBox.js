@@ -18,7 +18,7 @@ const InputBox = () => {
       <div className=" flex space-x-4 p-4 items-center">
         <Image
           src={session.user.image}
-          className="mx-1 rounded-full cursor-pointer"
+          className="rounded-full cursor-pointer"
           width={40}
           height={40}
           layout="fixed"
