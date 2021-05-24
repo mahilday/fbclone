@@ -21,7 +21,7 @@ const InputBox = () => {
           className="rounded-full cursor-pointer"
           width={40}
           height={40}
-          layout="fixed"
+          alt=""
         />
         <form className="flex flex-1" onSubmit={sendPost}>
           <input
