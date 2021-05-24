@@ -15,10 +15,10 @@ const InputBox = () => {
 
   return (
     <div className="bg-white p-2 rounded-2xl shadow-md text-gray-500 font-medium mt-6 ">
-      <div className="flex space-x-4 p-4 items-center">
+      <div className=" flex space-x-4 p-4 items-center">
         <Image
           src={session.user.image}
-          className="rounded-full cursor-pointer"
+          className="mx-1 rounded-full cursor-pointer"
           width={40}
           height={40}
           layout="fixed"
@@ -27,7 +27,7 @@ const InputBox = () => {
           <input
             type="text"
             ref={refs.inputRef}
-            className="rounded-full h-12 bg-gray-100 flex-grow flex-shrink px-5 focus:outline-none"
+            className="rounded-full h-12 w-40 bg-gray-100 flex-grow flex-shrink px-5 focus:outline-none"
             placeholder={`What's on your mind, ${session.user.name}?`}
           />
           <button hidden type="submit">
