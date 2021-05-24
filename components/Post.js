@@ -26,7 +26,7 @@ const Post = ({ name,id, message, email, image, postImage, timestamp }) => {
             </p>
           </div>
           </div>
-          <div onClick={()=>{deletePost(id, postImage)}} className="bg-gray-200 rounded-full p-2 hover:bg-gray-300 cursor-pointer"><TrashIcon className="h-4 text-red-500" /></div>
+          <div onClick={()=>{deletePost(id)}} className="bg-gray-200 rounded-full p-2 hover:bg-gray-300 cursor-pointer"><TrashIcon className="h-4 text-red-500" /></div>
         </div>
         <p className="pt-4">{message}</p>
       </div>

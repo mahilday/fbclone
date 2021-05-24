@@ -7,6 +7,7 @@ export const MainContext = createContext();
 const MainProvider = ({ children }) => {
   const [imageToPost, setImageToPost] = useState(null);
   const [posts, setPosts] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false)
   const inputRef = useRef(null);
   const filepickerRef = useRef(null);
   const [session] = useSession();
@@ -41,7 +42,7 @@ const MainProvider = ({ children }) => {
   ];
   //
   //
-  const deletePost = (id, image) => {
+  const deletePost = (id) => {
     if (confirm("Are you sure you want to delete this post?")) {
       db.collection("posts")
         .doc(id)
@@ -125,6 +126,10 @@ const MainProvider = ({ children }) => {
         posts,
         setPosts,
       },
+      modal:{
+          modalOpen,
+          setModalOpen
+      }
     },
     sendPost,
     addImageToPost,
