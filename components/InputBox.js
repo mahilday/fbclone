@@ -23,14 +23,14 @@ const InputBox = () => {
           height="40"
           layout="fixed"
         />
-        <form className="flex flex-1">
+        <form className="flex flex-1" onSubmit={sendPost}>
           <input
             type="text"
             ref={refs.inputRef}
             className="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none"
             placeholder={`What's on your mind, ${session.user.name}?`}
           />
-          <button hidden type="submit" onClick={sendPost}>
+          <button hidden type="submit">
             Submit
           </button>
         </form>
