@@ -52,7 +52,9 @@ const InputBox = () => {
       <div className="flex flex-grow justify-evenly items-center p-4">
         <div className="inputIcon">
           <VideoCameraIcon className="h-6 text-red-500 mr-1" />
-          <p className="text-xs sm:text-sm xl:text-base">Live Video</p>
+          <p className="hidden sm:flex dtext-xs sm:text-sm xl:text-base">
+            Live Video
+          </p>
         </div>
         <div
           onClick={() => {
@@ -61,7 +63,9 @@ const InputBox = () => {
           className="inputIcon"
         >
           <CameraIcon className="h-6 text-green-500 mr-1" />
-          <p className="text-xs sm:text-sm xl:text-base">Photo/Video</p>
+          <p className=" hidden sm:flex  text-xs sm:text-sm xl:text-base">
+            Photo/Video
+          </p>
           <input
             hidden
             type="file"
@@ -71,7 +75,9 @@ const InputBox = () => {
         </div>
         <div className="inputIcon">
           <EmojiHappyIcon className="h-6 text-yellow-300 mr-1" />
-          <p className="text-xs sm:text-sm xl:text-base">Feeling/Activity</p>
+          <p className="hidden sm:flex text-xs sm:text-sm xl:text-base">
+            Feeling/Activity
+          </p>
         </div>
       </div>
     </div>
