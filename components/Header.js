@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { HeaderContext } from "../contexts/HeaderContext";
 import Image from "next/image";
 import {
@@ -17,13 +17,16 @@ import {
 } from "@heroicons/react/outline";
 import HeaderIcon from "./HeaderIcon";
 import { signOut, useSession } from "next-auth/client";
+import { Search } from ".";
 
 const Header = () => {
   const { status } = useContext(HeaderContext);
   const [session] = useSession()
+  const [searchOpen, setSearchOpen] = useState(false)
   return (
-    <div className="sticky top-0 bg-white z-50 flex items-center p-2 lg:px-5 shadow-md">
+    <div className={`sticky top-0 bg-white z-50 flex ${searchOpen && "justify-between"} items-center p-2 lg:px-5 shadow-md`}>
       {/* header left */}
+      {!searchOpen && (
       <div className="flex items-center">
         <Image
           src="https://links.papareact.com/5me"
@@ -32,16 +35,21 @@ const Header = () => {
           layout="fixed"
         />
         <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
-          <SearchIcon className="h-6 text-gray-600" />
+          <SearchIcon className="h-6 cursor-pointer lg:pointer-events-none text-gray-600" onClick= {()=> setSearchOpen(true)} />
           <input
             className="hidden md:inline-flex ml-2 items-center bg-transparent outline-none flex-shrink placeholder-gray-500"
             type="text"
             placeholder="Search facebook"
           />
         </div>
-      </div>
+        
+      </div>)}
+      {searchOpen && (
+        <Search setSearchOpen={setSearchOpen}/>
+      )}
+
       {/* header center */}
-      <div className="flex justify-center flex-grow">
+     {!searchOpen && <div className="flex justify-center flex-grow">
         <div className="flex space-x-6 md:space-x-2">
           <HeaderIcon stats={status} active Icon={HomeIcon} linkto="/" />
           <HeaderIcon stats={status} Icon={FlagIcon} linkto="/nationality" />
@@ -50,6 +58,7 @@ const Header = () => {
           <HeaderIcon stats={status} Icon={UserGroupIcon} linkto="/groups" />
         </div>
       </div>
+}
       {/* header right */}
       <div className="flex sm:space-x-2 justify-end items-center ">
         <Image

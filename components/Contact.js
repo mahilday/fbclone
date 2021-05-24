@@ -12,7 +12,7 @@ const Contact = ({src, name}) => {
             layout="fixed"
         />
         <p className="font-medium">{name}</p>
-        <div className="absolute bottom-2 left-8 bg-green-400 h-2 w-2 rounded-full animate-bounce shadow-md"></div>
+        <div className="absolute bottom-2 left-8 bg-green-400 h-3 w-3 rounded-full animate-pulse shadow-md"></div>
     </div>
     );
 }

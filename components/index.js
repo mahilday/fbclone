@@ -10,6 +10,7 @@ export {default as Posts} from './Posts'
 export {default as Post} from './Post'
 export {default as Widgets} from './Widgets'
 export {default as Contact} from './Contact'
+export {default as Search} from './Search'
 
 
 
