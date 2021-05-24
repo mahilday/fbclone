@@ -5,7 +5,7 @@ const StoryCard = ({ name, src, profile }) => {
       className="relative h-14 w-14 md:h-20 md:w-20 lg:w-32 lg:h-56 cursor-pointer overflow-x p-3 
             transition duration-200 transform ease-in hover:scale-105 hover:animate-pulse"
     >
-      <div className="absolute h-10 w-10 ring-4 ring-blue-500 p-5 opacity-0 lg:opacity-100 rounded-full z-50 top-3">
+      <div className="absolute h-10 w-10 ring-4 ring-blue-500 p-5 opacity-0 lg:opacity-100 rounded-full z-20 top-3">
         <Image
         className="rounded-full"
         src={profile}

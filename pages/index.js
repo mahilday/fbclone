@@ -2,12 +2,14 @@ import { getSession } from "next-auth/client";
 import Head from "next/head";
 import { useContext } from "react";
 import { Header, Login, Sidebar, Feed, Widgets } from "../components";
+import Modal from "../components/Modal";
 import { MainContext } from "../contexts/MainContext";
 import { db } from "../firebase";
 
 export default function Home({ session, posts }) {
   if (!session) return <Login />;
-  
+  const { status } = useContext(MainContext);
+
   return (
     <div className="h-screen bg-gray-100 overflow-hidden">
       <Head>
@@ -21,6 +23,8 @@ export default function Home({ session, posts }) {
         <Feed posts={posts} />
         <Widgets />
       </main>
+
+      <Modal title="Delete Post" description="Are you sure you want to delete this post" id={status.postId.postToDelete} />
     </div>
   );
 }

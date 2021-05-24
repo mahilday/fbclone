@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { MainContext } from "../contexts/MainContext";
 import { db } from "../firebase";
+import Modal from "./Modal";
 import Post from "./Post";
 
 const Posts = ({ posts }) => {

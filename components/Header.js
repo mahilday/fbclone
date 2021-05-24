@@ -24,7 +24,7 @@ const Header = () => {
   const [session] = useSession()
   const [searchOpen, setSearchOpen] = useState(false)
   return (
-    <div className={`sticky top-0 bg-white z-50 flex ${searchOpen && "justify-between"} items-center p-2 lg:px-5 shadow-md`}>
+    <div className={`sticky top-0 bg-white z-40 flex ${searchOpen && "justify-between"} items-center p-2 lg:px-5 shadow-md`}>
       {/* header left */}
       {!searchOpen && (
       <div className="flex items-center">

@@ -7,7 +7,9 @@ export const MainContext = createContext();
 const MainProvider = ({ children }) => {
   const [imageToPost, setImageToPost] = useState(null);
   const [posts, setPosts] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
+  const [imagePresent, setImagePresent] = useState(false)
   const inputRef = useRef(null);
   const filepickerRef = useRef(null);
   const [session] = useSession();
@@ -42,20 +44,28 @@ const MainProvider = ({ children }) => {
   ];
   //
   //
+  const postSet = (id, postImage) => {
+    setPostToDelete(id);
+    postImage ? setImagePresent(true) : setImagePresent(false)
+  };
+  const postReset = () => {
+    setPostToDelete(null);
+  };
   const deletePost = (id) => {
-    if (confirm("Are you sure you want to delete this post?")) {
-      db.collection("posts")
-        .doc(id)
-        .delete()
-        .then(() => {
+    db.collection("posts")
+      .doc(id)
+      .delete()
+      .then(() => {
+        if (imagePresent) {
           storage.ref(`posts/${id}`).delete();
-          console.log("doc deleted");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    return null;
+        }
+        console.log("doc deleted");
+        postReset();
+        CloseModal()
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   const sendPost = (e) => {
     e.preventDefault();
@@ -100,6 +110,12 @@ const MainProvider = ({ children }) => {
       });
     inputRef.current.value = "";
   };
+  const OpenModal = () => {
+    setModalOpen(true);
+  };
+  const CloseModal = () => {
+    setModalOpen(false);
+  };
 
   const addImageToPost = (e) => {
     const reader = new FileReader();
@@ -126,16 +142,22 @@ const MainProvider = ({ children }) => {
         posts,
         setPosts,
       },
-      modal:{
-          modalOpen,
-          setModalOpen
-      }
+      modal: {
+        modalOpen,
+        setModalOpen,
+      },
+      postId: {
+        postToDelete,
+      },
     },
     sendPost,
     addImageToPost,
     removeImage,
     saveDoc,
     deletePost,
+    OpenModal,
+    CloseModal,
+    postSet,
     data: {
       storiesDiff,
     },
