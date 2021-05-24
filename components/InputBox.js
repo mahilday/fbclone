@@ -27,7 +27,7 @@ const InputBox = () => {
           <input
             type="text"
             ref={refs.inputRef}
-            className="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none"
+            className="rounded-full h-12 bg-gray-100 flex-grow flex-shrink px-5 focus:outline-none"
             placeholder={`What's on your mind, ${session.user.name}?`}
           />
           <button hidden type="submit">
