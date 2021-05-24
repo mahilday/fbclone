@@ -2,15 +2,14 @@ import Image from "next/image";
 import { useSession } from "next-auth/client";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import { db } from "../firebase";
 import firebase from "firebase";
 import { MainContext } from "../contexts/MainContext";
 
 const InputBox = () => {
   const [session, loading] = useSession();
-  const inputRef = useRef(null);
-  const filepickerRef = useRef(null);
+
   const { sendPost, refs, addImageToPost, removeImage, status } =
     useContext(MainContext);
 
@@ -38,21 +37,21 @@ const InputBox = () => {
         {status.image.imageToPost && (
           <div
             onClick={removeImage}
-            className="flex-col filter hover:brightness-110 
+            className="flex flex-col filter hover:brightness-110 
                 transition duration-150 transform hover:scale-105 cursor-pointer"
           >
             <img
-              className="h-8 object-contain"
+              className="h-10 object-contain"
               src={status.image.imageToPost}
               alt=""
             />
-            <p className="uppercase text-xs text-center text-red-500">Remove</p>
+            <p className="text-xs text-center text-red-500">Remove</p>
           </div>
         )}
       </div>
       <div className="flex flex-grow justify-evenly items-center p-4">
         <div className="inputIcon">
-          <VideoCameraIcon className="h-7 text-red-500 mr-1" />
+          <VideoCameraIcon className="h-6 text-red-500 mr-1" />
           <p className="text-xs sm:text-sm xl:text-base">Live Video</p>
         </div>
         <div
@@ -61,7 +60,7 @@ const InputBox = () => {
           }}
           className="inputIcon"
         >
-          <CameraIcon className="h-7 text-green-500 mr-1" />
+          <CameraIcon className="h-6 text-green-500 mr-1" />
           <p className="text-xs sm:text-sm xl:text-base">Photo/Video</p>
           <input
             hidden
@@ -71,7 +70,7 @@ const InputBox = () => {
           />
         </div>
         <div className="inputIcon">
-          <EmojiHappyIcon className="h-7 text-yellow-300 mr-1" />
+          <EmojiHappyIcon className="h-6 text-yellow-300 mr-1" />
           <p className="text-xs sm:text-sm xl:text-base">Feeling/Activity</p>
         </div>
       </div>

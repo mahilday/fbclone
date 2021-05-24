@@ -1,9 +1,13 @@
 import { getSession } from "next-auth/client";
 import Head from "next/head";
-import { Header, Login, Sidebar, Feed} from "../components";
+import { useContext } from "react";
+import { Header, Login, Sidebar, Feed, Widgets } from "../components";
+import { MainContext } from "../contexts/MainContext";
+import { db } from "../firebase";
 
-export default function Home({ session }) {
+export default function Home({ session, posts }) {
   if (!session) return <Login />;
+  
   return (
     <div className="h-screen bg-gray-100 overflow-hidden">
       <Head>
@@ -14,8 +18,8 @@ export default function Home({ session }) {
       <Header />
       <main className="flex">
         <Sidebar />
-        <Feed />
-        {/* widgets */}
+        <Feed posts={posts} />
+        <Widgets />
       </main>
     </div>
   );
@@ -23,9 +27,16 @@ export default function Home({ session }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  const posts = await db.collection("posts").orderBy("timestamp", "desc").get();
+  const docs = posts.docs.map((post) => ({
+    id: post.id,
+    ...post.data(),
+    timestamp: null,
+  }));
   return {
     props: {
       session,
+      posts: docs,
     },
   };
 }
