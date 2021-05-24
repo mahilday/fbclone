@@ -6,7 +6,7 @@ import firebase from "firebase";
 export const MainContext = createContext();
 const MainProvider = ({ children }) => {
   const [imageToPost, setImageToPost] = useState(null);
-  const [posts, setPosts] = useState(null)
+  const [posts, setPosts] = useState(null);
   const inputRef = useRef(null);
   const filepickerRef = useRef(null);
   const [session] = useSession();
@@ -41,7 +41,21 @@ const MainProvider = ({ children }) => {
   ];
   //
   //
-
+  const deletePost = (id, image) => {
+    if (confirm("Are you sure you want to delete this post?")) {
+      db.collection("posts")
+        .doc(id)
+        .delete()
+        .then(() => {
+          storage.ref(`posts/${id}`).delete();
+          console.log("doc deleted");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+    return null;
+  };
   const sendPost = (e) => {
     e.preventDefault();
     if (!inputRef.current.value) return;
@@ -95,9 +109,9 @@ const MainProvider = ({ children }) => {
       setImageToPost(readerEvent.target.result);
     };
   };
-  const saveDoc =(data)=>{
-    setPosts(data)
-  }
+  const saveDoc = (data) => {
+    setPosts(data);
+  };
   const removeImage = () => {
     setImageToPost(null);
   };
@@ -108,14 +122,15 @@ const MainProvider = ({ children }) => {
         setImageToPost,
       },
       postContext: {
-          posts,
-          setPosts
-      }
+        posts,
+        setPosts,
+      },
     },
     sendPost,
     addImageToPost,
     removeImage,
     saveDoc,
+    deletePost,
     data: {
       storiesDiff,
     },

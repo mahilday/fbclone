@@ -1,11 +1,15 @@
 import Image from "next/image";
-import { ChatAltIcon, ShareIcon, ThumbUpIcon } from "@heroicons/react/outline";
+import { ChatAltIcon, ShareIcon, ThumbUpIcon, TrashIcon } from "@heroicons/react/outline";
+import {useContext} from 'react'
+import {MainContext} from '../contexts/MainContext'
 
-const Post = ({ name, message, email, image, postImage, timestamp }) => {
+const Post = ({ name,id, message, email, image, postImage, timestamp }) => {
+    const {deletePost} = useContext(MainContext)
   return (
     <div className="flex flex-col">
       <div className="p-5 mt-5 bg-white rounded-t-2xl shadow-sm">
-        <div className="flex items-center space-x-2">
+        <div className="flex justify-between items-center space-x-2">
+            <div className="flex items-center space-x-2">
           <img
             className="rounded-full"
             width={40}
@@ -21,6 +25,8 @@ const Post = ({ name, message, email, image, postImage, timestamp }) => {
                 : "Loading..."}
             </p>
           </div>
+          </div>
+          <div onClick={()=>{deletePost(id, postImage)}} className="bg-gray-200 rounded-full p-2 hover:bg-gray-300 cursor-pointer"><TrashIcon className="h-4 text-red-500" /></div>
         </div>
         <p className="pt-4">{message}</p>
       </div>
