@@ -60,8 +60,8 @@ const Header = () => {
           height="40"
           layout="fixed"
         />
-        <p className="hidden md:inline-flex whitespace-nowrap pr-3 font-semibold">
-          Mathilda Imadojiemu
+        <p className="hidden lg:inline-flex whitespace-nowrap pr-3 font-semibold">
+          {session.user.name}
         </p>
         <ViewGridIcon className="icon" />
         <ChatIcon className="icon" />
