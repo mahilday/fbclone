@@ -19,8 +19,8 @@ const InputBox = () => {
         <Image
           src={session.user.image}
           className="rounded-full cursor-pointer"
-          width="40"
-          height="40"
+          width={40}
+          height={40}
           layout="fixed"
         />
         <form className="flex flex-1" onSubmit={sendPost}>
